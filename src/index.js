@@ -1,9 +1,8 @@
 import { GraphQLServer } from "graphql-yoga";
 
-import { prisma } from "./generated/prisma-client";
-import { resolvers } from "./resolvers";
-import { middlewares } from "./middlewares";
 import { PORT, DEBUG, PLAYGROUND } from "./config";
+import { middlewares } from "./middlewares";
+import { typeDefs, resolvers, context } from "./api";
 
 const opts = {
   port: PORT,
@@ -12,10 +11,10 @@ const opts = {
 };
 
 const server = new GraphQLServer({
-  typeDefs: "src/schema.graphql",
+  typeDefs,
   resolvers,
   middlewares,
-  context: req => ({ ...req, db: prisma })
+  context
 });
 
 server.start(opts, ({ port }) =>

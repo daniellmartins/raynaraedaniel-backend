@@ -1,0 +1,12 @@
+type Query {
+  me: User!
+}
+
+type Mutation {
+  signin(code: Int!): AuthPayload
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}

@@ -1,17 +1,22 @@
-import { rule, shield } from "graphql-shield";
+import { verify } from "jsonwebtoken";
 
-import { getUserId } from "../utils";
+import { APP_SECRET } from "../config";
 
-const rules = {
-  isAuthenticated: rule()(async (_, args, ctx, info) => {
-    const userId = getUserId(ctx, info);
-    ctx.userId = userId;
-    return !!userId;
-  })
+const isAuthenticated = async (resolve, _, args, ctx, info) => {
+  const authorized = ctx.request.get("Authorization");
+  if (!authorized) throw new Error("Not authorized");
+
+  const token = authorized.replace("Bearer ", "");
+  const verifiedToken = verify(token, APP_SECRET);
+  if (!verifiedToken && !verifiedToken.userId)
+    throw new Error("Token is invalid");
+
+  ctx.userId = verifiedToken.userId;
+  return resolve();
 };
 
-export const permissions = shield({
+export const permissions = {
   Query: {
-    me: rules.isAuthenticated
+    me: isAuthenticated
   }
-});
+};

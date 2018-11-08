@@ -18,13 +18,13 @@ scalar Long
 type Mutation {
   createProduct(data: ProductCreateInput!): Product!
   updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
-  updateManyProducts(data: ProductUpdateInput!, where: ProductWhereInput): BatchPayload!
+  updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
   upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
   deleteProduct(where: ProductWhereUniqueInput!): Product
   deleteManyProducts(where: ProductWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -122,6 +122,14 @@ input ProductSubscriptionWhereInput {
 }
 
 input ProductUpdateInput {
+  name: String
+  description: String
+  price: Float
+  quantity: Int
+  photoUrl: String
+}
+
+input ProductUpdateManyMutationInput {
   name: String
   description: String
   price: Float
@@ -290,6 +298,11 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  code: Int
+  name: String
+}
+
+input UserUpdateManyMutationInput {
   code: Int
   name: String
 }
