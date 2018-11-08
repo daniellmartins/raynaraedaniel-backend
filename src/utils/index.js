@@ -1,6 +1,6 @@
-const { verify } = require("jsonwebtoken");
+import { verify } from "jsonwebtoken";
 
-const APP_SECRET = "my-secret-password-raynara-e-daniel";
+import { APP_SECRET } from "../config";
 
 class AuthError extends Error {
   constructor() {
@@ -8,16 +8,11 @@ class AuthError extends Error {
   }
 }
 
-function getUserId(context) {
-  const Authorization = context.request.get("Authorization");
+export const getUserId = ctx => {
+  const Authorization = ctx.request.get("Authorization");
   if (Authorization) {
     const token = Authorization.replace("Bearer ", "");
     const verifiedToken = verify(token, APP_SECRET);
     return verifiedToken && verifiedToken.userId;
   }
-}
-
-module.exports = {
-  getUserId,
-  APP_SECRET
 };

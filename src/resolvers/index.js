@@ -1,9 +1,7 @@
-const { Query } = require("./Query");
-const { Mutation } = require("./Mutation");
+import { Query } from "./Query";
+import { Mutation } from "./Mutation";
 
-const resolvers = {
+export const resolvers = {
   Query,
   Mutation
 };
-
-module.exports = { resolvers };

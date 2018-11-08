@@ -1,7 +1,6 @@
 endpoint: http://localhost:4466/raynaraedaniel/dev
 datamodel: datamodel.prisma
-secret: my-secret-password-raynara-e-daniel
-
+# secret: my-secret-password-raynara-e-daniel
 # generate:
 #   - generator: javascript-client
 #     output: ../src/generated/prisma-client/

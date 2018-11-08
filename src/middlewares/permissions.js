@@ -1,21 +1,17 @@
-const { rule, shield } = require("graphql-shield");
+import { rule, shield } from "graphql-shield";
 
-const { getUserId } = require("../utils");
+import { getUserId } from "../utils";
 
 const rules = {
-  isUser: rule()((_, args, ctx) => {
-    const userId = getUserId(ctx);
-
+  isAuthenticated: rule()(async (_, args, ctx, info) => {
+    const userId = getUserId(ctx, info);
+    ctx.userId = userId;
     return !!userId;
   })
 };
 
-const permissions = shield({
+export const permissions = shield({
   Query: {
-    me: rules.isUser
+    me: rules.isAuthenticated
   }
 });
-
-module.exports = {
-  permissions
-};

@@ -5,14 +5,21 @@
   "author": "Daniel Martins <daniellmarttins@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "nodemon -e js,graphql --exec babel-node src/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^6.1.0",
     "graphql": "^14.0.2",
     "graphql-shield": "^4.1.0",
     "graphql-yoga": "^1.16.7",
     "jsonwebtoken": "^8.3.0",
     "prisma-client-lib": "^1.19.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^1.18.6"
   }
 }

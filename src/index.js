@@ -1,16 +1,23 @@
-const { GraphQLServer } = require("graphql-yoga");
-const { prisma } = require("./generated/prisma-client");
-const { resolvers } = require("./resolvers");
+import { GraphQLServer } from "graphql-yoga";
+
+import { prisma } from "./generated/prisma-client";
+import { resolvers } from "./resolvers";
+import { middlewares } from "./middlewares";
+import { PORT, DEBUG, PLAYGROUND } from "./config";
+
+const opts = {
+  port: PORT,
+  debug: DEBUG,
+  playground: PLAYGROUND
+};
 
 const server = new GraphQLServer({
   typeDefs: "src/schema.graphql",
   resolvers,
-  context: req => ({
-    ...req,
-    db: prisma
-  })
+  middlewares,
+  context: req => ({ ...req, db: prisma })
 });
 
-server.start(({ port }) =>
+server.start(opts, ({ port }) =>
   console.log(`Server is running on http://localhost:${port}`)
 );
