@@ -2,8 +2,15 @@ type User {
   id: ID! @unique
   code: Int! @unique
   name: String!
-  lastname: String!
-  email: String
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type Product {
+  id: ID! @unique
+  name: String!
+  description: String
+  price: Float!
+  quantity: Int! @default(value: "1")
+  photoUrl: String
 }
