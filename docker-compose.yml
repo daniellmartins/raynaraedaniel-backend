@@ -1,7 +1,7 @@
 version: "3"
 services:
   prisma:
-    image: prismagraphql/prisma:1.19.0
+    image: prismagraphql/prisma:1.20.1
     restart: on-failure
     ports:
       - "4466:4466"
@@ -16,7 +16,7 @@ services:
             host: mysql
             port: 3306
             user: root
-            password: prismaraynaraedaniel
+            password: prisma
             migrations: true
   mysql:
     image: mysql:5.7
@@ -24,8 +24,8 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: prismaraynaraedaniel
+      MYSQL_ROOT_PASSWORD: prisma
     volumes:
       - mysql:/var/lib/mysql
 volumes:
-  ? mysql
+  mysql:
