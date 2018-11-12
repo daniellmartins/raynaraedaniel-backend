@@ -4,6 +4,10 @@ type Query {
 
 type Mutation {
   createProduct(data: ProductCreateInput): Product!
+  updateProduct(
+    data: ProductUpdateInput
+    where: ProductWhereUniqueInput!
+  ): Product
 }
 
 type Product {
@@ -13,6 +17,7 @@ type Product {
   price: Float!
   quantity: Int!
   photoUrl: String
+  active: Boolean
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -21,7 +26,20 @@ input ProductCreateInput {
   name: String!
   description: String
   price: Float!
-  quantity: Int
+  quantity: Int!
   photoUrl: String
   active: Boolean
+}
+
+input ProductUpdateInput {
+  name: String!
+  description: String
+  price: Float!
+  quantity: Int!
+  photoUrl: String
+  active: Boolean
+}
+
+input ProductWhereUniqueInput {
+  id: ID
 }

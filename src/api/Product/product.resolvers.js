@@ -6,7 +6,10 @@ export default {
   },
   Mutation: {
     createProduct: async (_, { data }, { db }, info) => {
-      return await db.createProduct({ ...data });
+      return await db.createProduct(data);
+    },
+    updateProduct: async (_, { data, where }, { db }, info) => {
+      return await db.updateProduct({ data, where });
     }
   }
 };
