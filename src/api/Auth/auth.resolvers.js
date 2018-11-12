@@ -9,11 +9,11 @@ export default {
     }
   },
   Mutation: {
-    signin: async (_, { code }, ctx) => {
-      const user = await ctx.db.user({ code });
+    signin: async (_, { code }, { db }) => {
+      const user = await db.user({ code });
       if (!user) throw new Error(`No user found for the code "${code}"`);
       return {
-        token: sign({ userId: user.id }, APP_SECRET),
+        token: sign({ userId: user.id, role: user.role }, APP_SECRET),
         user
       };
     }

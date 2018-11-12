@@ -2,6 +2,7 @@ type User {
   id: ID! @unique
   code: Int! @unique
   name: String!
+  role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -13,4 +14,12 @@ type Product {
   price: Float!
   quantity: Int! @default(value: "1")
   photoUrl: String
+  active: Boolean! @default(value: "true")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum Role {
+  USER
+  ADMIN
 }
