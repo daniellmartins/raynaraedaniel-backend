@@ -54,6 +54,9 @@ type Product {
   price: Float!
   quantity: Int!
   photoUrl: String
+  active: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type ProductConnection {
@@ -68,6 +71,7 @@ input ProductCreateInput {
   price: Float!
   quantity: Int
   photoUrl: String
+  active: Boolean
 }
 
 type ProductEdge {
@@ -88,6 +92,8 @@ enum ProductOrderByInput {
   quantity_DESC
   photoUrl_ASC
   photoUrl_DESC
+  active_ASC
+  active_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -101,6 +107,9 @@ type ProductPreviousValues {
   price: Float!
   quantity: Int!
   photoUrl: String
+  active: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type ProductSubscriptionPayload {
@@ -127,6 +136,7 @@ input ProductUpdateInput {
   price: Float
   quantity: Int
   photoUrl: String
+  active: Boolean
 }
 
 input ProductUpdateManyMutationInput {
@@ -135,6 +145,7 @@ input ProductUpdateManyMutationInput {
   price: Float
   quantity: Int
   photoUrl: String
+  active: Boolean
 }
 
 input ProductWhereInput {
@@ -210,6 +221,24 @@ input ProductWhereInput {
   photoUrl_not_starts_with: String
   photoUrl_ends_with: String
   photoUrl_not_ends_with: String
+  active: Boolean
+  active_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ProductWhereInput!]
   OR: [ProductWhereInput!]
   NOT: [ProductWhereInput!]
@@ -229,6 +258,11 @@ type Query {
   node(id: ID!): Node
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 type Subscription {
   product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
@@ -238,6 +272,7 @@ type User {
   id: ID!
   code: Int!
   name: String!
+  role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -251,6 +286,7 @@ type UserConnection {
 input UserCreateInput {
   code: Int!
   name: String!
+  role: Role!
 }
 
 type UserEdge {
@@ -265,6 +301,8 @@ enum UserOrderByInput {
   code_DESC
   name_ASC
   name_DESC
+  role_ASC
+  role_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -275,6 +313,7 @@ type UserPreviousValues {
   id: ID!
   code: Int!
   name: String!
+  role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -300,11 +339,13 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   code: Int
   name: String
+  role: Role
 }
 
 input UserUpdateManyMutationInput {
   code: Int
   name: String
+  role: Role
 }
 
 input UserWhereInput {
@@ -344,6 +385,10 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  role: Role
+  role_not: Role
+  role_in: [Role!]
+  role_not_in: [Role!]
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

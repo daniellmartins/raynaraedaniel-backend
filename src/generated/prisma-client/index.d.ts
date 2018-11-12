@@ -155,10 +155,14 @@ export type ProductOrderByInput =
   | "quantity_DESC"
   | "photoUrl_ASC"
   | "photoUrl_DESC"
+  | "active_ASC"
+  | "active_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
+
+export type Role = "USER" | "ADMIN";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -167,6 +171,8 @@ export type UserOrderByInput =
   | "code_DESC"
   | "name_ASC"
   | "name_DESC"
+  | "role_ASC"
+  | "role_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -251,6 +257,24 @@ export interface ProductWhereInput {
   photoUrl_not_starts_with?: String;
   photoUrl_ends_with?: String;
   photoUrl_not_ends_with?: String;
+  active?: Boolean;
+  active_not?: Boolean;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: ProductWhereInput[] | ProductWhereInput;
   OR?: ProductWhereInput[] | ProductWhereInput;
   NOT?: ProductWhereInput[] | ProductWhereInput;
@@ -298,6 +322,10 @@ export interface UserWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
+  role?: Role;
+  role_not?: Role;
+  role_in?: Role[] | Role;
+  role_not_in?: Role[] | Role;
   createdAt?: DateTimeInput;
   createdAt_not?: DateTimeInput;
   createdAt_in?: DateTimeInput[] | DateTimeInput;
@@ -325,6 +353,7 @@ export interface ProductCreateInput {
   price: Float;
   quantity?: Int;
   photoUrl?: String;
+  active?: Boolean;
 }
 
 export interface ProductUpdateInput {
@@ -333,6 +362,7 @@ export interface ProductUpdateInput {
   price?: Float;
   quantity?: Int;
   photoUrl?: String;
+  active?: Boolean;
 }
 
 export interface ProductUpdateManyMutationInput {
@@ -341,21 +371,25 @@ export interface ProductUpdateManyMutationInput {
   price?: Float;
   quantity?: Int;
   photoUrl?: String;
+  active?: Boolean;
 }
 
 export interface UserCreateInput {
   code: Int;
   name: String;
+  role: Role;
 }
 
 export interface UserUpdateInput {
   code?: Int;
   name?: String;
+  role?: Role;
 }
 
 export interface UserUpdateManyMutationInput {
   code?: Int;
   name?: String;
+  role?: Role;
 }
 
 export interface ProductSubscriptionWhereInput {
@@ -391,6 +425,9 @@ export interface Product {
   price: Float;
   quantity: Int;
   photoUrl?: String;
+  active: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface ProductPromise extends Promise<Product>, Fragmentable {
@@ -400,6 +437,9 @@ export interface ProductPromise extends Promise<Product>, Fragmentable {
   price: () => Promise<Float>;
   quantity: () => Promise<Int>;
   photoUrl: () => Promise<String>;
+  active: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface ProductSubscription
@@ -411,6 +451,9 @@ export interface ProductSubscription
   price: () => Promise<AsyncIterator<Float>>;
   quantity: () => Promise<AsyncIterator<Int>>;
   photoUrl: () => Promise<AsyncIterator<String>>;
+  active: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface ProductConnection {}
@@ -490,6 +533,7 @@ export interface User {
   id: ID_Output;
   code: Int;
   name: String;
+  role: Role;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -498,6 +542,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   code: () => Promise<Int>;
   name: () => Promise<String>;
+  role: () => Promise<Role>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -508,6 +553,7 @@ export interface UserSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   code: () => Promise<AsyncIterator<Int>>;
   name: () => Promise<AsyncIterator<String>>;
+  role: () => Promise<AsyncIterator<Role>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -608,6 +654,9 @@ export interface ProductPreviousValues {
   price: Float;
   quantity: Int;
   photoUrl?: String;
+  active: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface ProductPreviousValuesPromise
@@ -619,6 +668,9 @@ export interface ProductPreviousValuesPromise
   price: () => Promise<Float>;
   quantity: () => Promise<Int>;
   photoUrl: () => Promise<String>;
+  active: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface ProductPreviousValuesSubscription
@@ -630,6 +682,9 @@ export interface ProductPreviousValuesSubscription
   price: () => Promise<AsyncIterator<Float>>;
   quantity: () => Promise<AsyncIterator<Int>>;
   photoUrl: () => Promise<AsyncIterator<String>>;
+  active: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -659,6 +714,7 @@ export interface UserPreviousValues {
   id: ID_Output;
   code: Int;
   name: String;
+  role: Role;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -669,6 +725,7 @@ export interface UserPreviousValuesPromise
   id: () => Promise<ID_Output>;
   code: () => Promise<Int>;
   name: () => Promise<String>;
+  role: () => Promise<Role>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -679,6 +736,7 @@ export interface UserPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   code: () => Promise<AsyncIterator<Int>>;
   name: () => Promise<AsyncIterator<String>>;
+  role: () => Promise<AsyncIterator<Role>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
