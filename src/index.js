@@ -4,6 +4,10 @@ import { PORT, DEBUG, PLAYGROUND } from "./config";
 import { middlewares } from "./middlewares";
 import { typeDefs, resolvers, context } from "./api";
 
+String.prototype.isEmpty = function() {
+  return this.length === 0 || !this.trim();
+};
+
 const opts = {
   port: PORT,
   debug: DEBUG,

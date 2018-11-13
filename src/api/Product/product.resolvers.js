@@ -9,6 +9,10 @@ export default {
       return await db.createProduct(data);
     },
     updateProduct: async (_, { data, where }, { db }, info) => {
+      if ((data.name || data.name === "") && data.name.isEmpty()) {
+        throw new Error("updateProduct name can not be null");
+      }
+
       return await db.updateProduct({ data, where });
     }
   }

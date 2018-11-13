@@ -32,10 +32,10 @@ input ProductCreateInput {
 }
 
 input ProductUpdateInput {
-  name: String!
+  name: String
   description: String
-  price: Float!
-  quantity: Int!
+  price: Float
+  quantity: Int
   photoUrl: String
   active: Boolean
 }
