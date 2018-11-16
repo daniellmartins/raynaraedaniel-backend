@@ -1,4 +1,5 @@
 import { GraphQLServer } from "graphql-yoga";
+import "./database";
 
 import { PORT, DEBUG, PLAYGROUND } from "./config";
 import { middlewares } from "./middlewares";

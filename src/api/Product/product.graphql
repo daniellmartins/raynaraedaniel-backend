@@ -35,9 +35,9 @@ type Mutation {
   deleteProduct(where: ProductWhereUniqueInput!): Product
 }
 
-type Subscription {
-  product: ProductSubscriptionPayload
-}
+# type Subscription {
+#   product: ProductSubscriptionPayload
+# }
 
 type ProductSubscriptionPayload {
   mutation: MutationType!
@@ -47,7 +47,7 @@ type ProductSubscriptionPayload {
 }
 
 type Product {
-  id: ID!
+  _id: ID!
   name: String!
   description: String
   price: Float!
@@ -77,11 +77,11 @@ input ProductUpdateInput {
 }
 
 input ProductWhereUniqueInput {
-  id: ID
+  _id: ID
 }
 
 type ProductPreviousValues {
-  id: ID!
+  _id: ID!
   name: String!
   description: String
   price: Float!

@@ -1,9 +1,21 @@
 scalar DateTime
 
+enum Role {
+  USER
+  ADMIN
+}
+
 type User {
-  id: ID!
+  _id: ID!
   code: Int!
   name: String!
+  role: Role
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input UserCreateInput {
+  name: String!
+  code: Int!
+  role: Role
 }

@@ -3,10 +3,11 @@ type Query {
 }
 
 type Mutation {
-  signin(code: Int!): AuthPayload
+  signin(code: Int!): AuthPayload!
+  signup(data: UserCreateInput): AuthPayload!
 }
 
 type AuthPayload {
   token: String!
-  user: User!
+  user: User
 }

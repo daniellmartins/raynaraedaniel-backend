@@ -40,6 +40,7 @@ export const permissions = {
     products: isUser
   },
   Mutation: {
+    signup: isAdmin,
     createProduct: isAdmin,
     updateProduct: isAdmin,
     deleteProduct: isAdmin
