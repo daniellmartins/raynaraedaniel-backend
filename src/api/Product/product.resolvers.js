@@ -8,25 +8,40 @@ export default {
     }
   },
   Mutation: {
-    createProduct: async (_, { data }, { db }) => {
-      return await db.product.create({ data });
+    createProduct: async (_, { data }, { db, pubSub }) => {
+      const product = await db.product.create({ ...data });
+      await pubSub.publish("PRODUCT", {
+        product: { mutation: "CREATED", node: product }
+      });
+      return product;
     },
-    updateProduct: async (_, { data, where: { _id } }, { db }) => {
+    updateProduct: async (_, { data, where: { _id } }, { db, pubSub }) => {
       if ((data.name || data.name === "") && data.name.isEmpty()) {
         throw new Error("updateProduct name can not be null");
       }
-
-      return await db.product.findByIdAndUpdate(_id, { data }, { new: true });
+      const product = await db.product.findByIdAndUpdate(
+        _id,
+        { ...data },
+        { new: true }
+      );
+      await pubSub.publish("PRODUCT", {
+        product: { mutation: "UPDATED", node: product }
+      });
+      return product;
     },
-    deleteProduct: async (_, { where: { _id } }, { db }) => {
-      return await db.mutation.findByIdAndRemove(_id);
+    deleteProduct: async (_, { where: { _id } }, { db, pubSub }) => {
+      const product = await db.product.findByIdAndRemove(_id);
+      await pubSub.publish("PRODUCT", {
+        product: { mutation: "DELETED", node: product }
+      });
+      return product;
+    }
+  },
+  Subscription: {
+    product: {
+      subscribe: async (_, args, { pubSub }) => {
+        return await pubSub.asyncIterator("PRODUCT");
+      }
     }
   }
-  // Subscription: {
-  //   product: {
-  //     subscribe: (_, args, { db }, info) => {
-  //       return db.subscription.product({}, info);
-  //     }
-  //   }
-  // }
 };

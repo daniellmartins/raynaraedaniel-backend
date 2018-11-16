@@ -35,15 +35,13 @@ type Mutation {
   deleteProduct(where: ProductWhereUniqueInput!): Product
 }
 
-# type Subscription {
-#   product: ProductSubscriptionPayload
-# }
+type Subscription {
+  product: ProductSubscriptionPayload
+}
 
 type ProductSubscriptionPayload {
   mutation: MutationType!
   node: Product
-  updatedFields: [String!]
-  previousValues: ProductPreviousValues
 }
 
 type Product {
