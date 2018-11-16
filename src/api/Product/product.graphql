@@ -1,5 +1,29 @@
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+enum ProductOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  quantity_ASC
+  quantity_DESC
+  active_ASC
+  active_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
 type Query {
-  products: [Product!]
+  product(where: ProductWhereUniqueInput!): Product
+  products(orderBy: ProductOrderByInput): [Product!]
 }
 
 type Mutation {
@@ -8,6 +32,18 @@ type Mutation {
     data: ProductUpdateInput
     where: ProductWhereUniqueInput!
   ): Product
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+}
+
+type Subscription {
+  product: ProductSubscriptionPayload
+}
+
+type ProductSubscriptionPayload {
+  mutation: MutationType!
+  node: Product
+  updatedFields: [String!]
+  previousValues: ProductPreviousValues
 }
 
 type Product {
@@ -42,4 +78,16 @@ input ProductUpdateInput {
 
 input ProductWhereUniqueInput {
   id: ID
+}
+
+type ProductPreviousValues {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+  quantity: Int!
+  photoUrl: String
+  active: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
