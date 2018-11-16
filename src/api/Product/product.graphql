@@ -5,20 +5,9 @@ enum MutationType {
 }
 
 enum ProductOrderByInput {
-  id_ASC
-  id_DESC
   name_ASC
-  name_DESC
   price_ASC
   price_DESC
-  quantity_ASC
-  quantity_DESC
-  active_ASC
-  active_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type Query {

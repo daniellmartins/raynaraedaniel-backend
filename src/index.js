@@ -1,4 +1,5 @@
 import { GraphQLServer } from "graphql-yoga";
+import express from "express";
 import "./database";
 
 import { PORT, DEBUG, PLAYGROUND } from "./config";
@@ -22,6 +23,7 @@ const server = new GraphQLServer({
   context
 });
 
+server.express.use("/assets", express.static("assets"));
 server.start(opts, ({ port }) =>
   console.log(`Server is running on http://localhost:${port}`)
 );

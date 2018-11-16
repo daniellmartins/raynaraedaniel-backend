@@ -1,10 +1,19 @@
+function sort(orderBy) {
+  const sortSplit = orderBy ? orderBy.split("_") : "";
+  return sortSplit
+    ? sortSplit[1] === "DESC"
+      ? `-${sortSplit[0]}`
+      : sortSplit[0]
+    : "";
+}
+
 export default {
   Query: {
     product: async (_, { where: { _id } }, { db }) => {
       return await db.product.findById(_id);
     },
     products: async (_, { orderBy }, { db }) => {
-      return await db.product.find({ active: true }).sort(orderBy);
+      return await db.product.find({ active: true }).sort(sort(orderBy));
     }
   },
   Mutation: {
