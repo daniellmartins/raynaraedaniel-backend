@@ -33,6 +33,7 @@ export default {
         { ...data },
         { new: true }
       );
+      if (!product) throw new Error("The product does not exist");
       await pubSub.publish("PRODUCT", {
         product: { mutation: "UPDATED", node: product }
       });
@@ -40,6 +41,7 @@ export default {
     },
     deleteProduct: async (_, { where: { _id } }, { db, pubSub }) => {
       const product = await db.product.findByIdAndRemove(_id);
+      if (!product) throw new Error("The product does not exist");
       await pubSub.publish("PRODUCT", {
         product: { mutation: "DELETED", node: product }
       });
