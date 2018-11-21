@@ -13,7 +13,9 @@ export default {
       return await db.product.findById(_id);
     },
     products: async (_, { orderBy }, { db }) => {
-      return await db.product.find({ active: true }).sort(sort(orderBy));
+      return await db.product
+        .find({ active: true })
+        .sort([["quantity"], [sort(orderBy)]]);
     }
   },
   Mutation: {
