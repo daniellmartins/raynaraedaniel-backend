@@ -17,8 +17,11 @@ const isAuthenticated = async (_, args, ctx, info) => {
   if (!verifiedToken && !verifiedToken.userId)
     throw new Error("Token is invalid");
 
-  ctx.userId = verifiedToken.userId;
-  ctx.role = verifiedToken.role;
+  const user = await ctx.db.user.findById(verifiedToken.userId);
+  if (!user) throw new Error("No user found");
+
+  ctx.userId = user._id;
+  ctx.role = user.role;
   return true;
 };
 
@@ -36,13 +39,15 @@ const isAdmin = async (resolve, _, args, ctx, info) => {
 
 export const permissions = {
   Query: {
+    cart: isUser,
     me: isUser,
     products: isUser
   },
   Mutation: {
-    signup: isAdmin,
+    addCart: isUser,
     createProduct: isAdmin,
-    updateProduct: isAdmin,
-    deleteProduct: isAdmin
+    deleteProduct: isAdmin,
+    signup: isAdmin,
+    updateProduct: isAdmin
   }
 };
