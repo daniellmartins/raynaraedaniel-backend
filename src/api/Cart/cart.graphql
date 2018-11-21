@@ -1,0 +1,31 @@
+type Query {
+  cart: [Cart!]
+}
+
+type Mutation {
+  addCart(data: CartAddInput!, where: CartWhereUniqueInput!): Cart
+}
+
+type Subscription {
+  cart: CartSubscriptionPayload
+}
+
+type Cart {
+  _id: ID!
+  user: User!
+  product: Product!
+  quantity: Int!
+}
+
+input CartAddInput {
+  quantity: Int!
+}
+
+input CartWhereUniqueInput {
+  productId: ID
+}
+
+type CartSubscriptionPayload {
+  mutation: MutationType!
+  node: Cart
+}
