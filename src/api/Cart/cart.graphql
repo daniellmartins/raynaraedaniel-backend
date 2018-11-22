@@ -4,6 +4,7 @@ type Query {
 
 type Mutation {
   addCart(data: CartAddInput!, where: CartWhereUniqueInput!): Cart
+  removeCart(where: CartWhereUniqueInput!): Cart
 }
 
 type Subscription {
@@ -15,6 +16,8 @@ type Cart {
   user: User!
   product: Product!
   quantity: Int!
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input CartAddInput {

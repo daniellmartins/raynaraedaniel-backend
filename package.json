@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dataloader": "^1.4.0",
     "dotenv": "^6.1.0",
     "graphql-yoga": "^1.16.7",
     "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
     "merge-graphql-schemas": "^1.5.8",
     "mongoose": "^5.3.12"
   },
