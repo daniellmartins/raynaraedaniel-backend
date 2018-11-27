@@ -5,7 +5,9 @@
   "author": "Daniel Martins <daniellmarttins@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -e js,graphql --exec babel-node src/index.js"
+    "dev": "nodemon -e js,graphql --exec babel-node src/index.js",
+    "build": "babel src -d build --copy-files",
+    "start": "node build/index.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "nodemon": "^1.18.6"
