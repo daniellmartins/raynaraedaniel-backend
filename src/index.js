@@ -1,5 +1,4 @@
 import { GraphQLServer } from "graphql-yoga";
-import express from "express";
 import axios from "axios";
 import { parseString } from "xml2js";
 import qs from "qs";
@@ -75,7 +74,9 @@ String.prototype.isEmpty = function() {
 const opts = {
   port: PORT,
   debug: DEBUG,
-  playground: PLAYGROUND
+  endpoint: "/graphql",
+  subscriptions: "/graphql",
+  playground: "/graphql"
 };
 
 const server = new GraphQLServer({
@@ -85,7 +86,6 @@ const server = new GraphQLServer({
   context
 });
 
-server.express.use("/assets", express.static("assets"));
 server.start(opts, ({ port }) =>
   console.log(`Server is running on http://localhost:${port}`)
 );
