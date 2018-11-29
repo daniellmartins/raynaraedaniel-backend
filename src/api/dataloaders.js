@@ -1,5 +1,5 @@
 import DataLoader from "dataloader";
-import keyBy from "lodash/keyBy";
+import _keyBy from "lodash/keyBy";
 
 async function batchCart(cartIds, db) {
   const products = await db.product.find({
@@ -8,7 +8,7 @@ async function batchCart(cartIds, db) {
     }
   });
 
-  const productByIds = keyBy(products, "_id");
+  const productByIds = _keyBy(products, "_id");
   return cartIds.map(cartId => productByIds[cartId]);
 }
 
