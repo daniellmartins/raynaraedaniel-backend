@@ -52,9 +52,9 @@ input ProductCreateInput {
   description: String
   photoUrl: String
   price: Float!
-  quantity: Int!
-  stock: Int!
-  reserved: Boolean!
+  quantity: Int
+  stock: Int
+  reserved: Boolean
   active: Boolean
 }
 
@@ -64,8 +64,8 @@ input ProductUpdateInput {
   photoUrl: String
   price: Float
   quantity: Int
-  stock: Int!
-  reserved: Boolean!
+  stock: Int
+  reserved: Boolean
   active: Boolean
 }
 
