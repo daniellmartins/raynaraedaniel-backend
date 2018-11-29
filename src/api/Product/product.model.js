@@ -9,6 +9,7 @@ const ProductSchema = Schema(
       required: true
     },
     description: String,
+    photoUrl: String,
     price: {
       type: Number,
       required: true
@@ -18,7 +19,16 @@ const ProductSchema = Schema(
       required: true,
       default: 1
     },
-    photoUrl: String,
+    stock: {
+      type: Number,
+      required: true,
+      default: 1
+    },
+    reserved: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     active: {
       type: Boolean,
       required: true,

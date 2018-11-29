@@ -37,9 +37,11 @@ type Product {
   _id: ID!
   name: String!
   description: String
+  photoUrl: String
   price: Float!
   quantity: Int!
-  photoUrl: String
+  stock: Int!
+  reserved: Boolean!
   active: Boolean
   createdAt: DateTime
   updatedAt: DateTime
@@ -48,18 +50,22 @@ type Product {
 input ProductCreateInput {
   name: String!
   description: String
+  photoUrl: String
   price: Float!
   quantity: Int!
-  photoUrl: String
+  stock: Int!
+  reserved: Boolean!
   active: Boolean
 }
 
 input ProductUpdateInput {
   name: String
   description: String
+  photoUrl: String
   price: Float
   quantity: Int
-  photoUrl: String
+  stock: Int!
+  reserved: Boolean!
   active: Boolean
 }
 
@@ -71,9 +77,11 @@ type ProductPreviousValues {
   _id: ID!
   name: String!
   description: String
+  photoUrl: String
   price: Float!
   quantity: Int!
-  photoUrl: String
+  stock: Int!
+  reserved: Boolean!
   active: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
