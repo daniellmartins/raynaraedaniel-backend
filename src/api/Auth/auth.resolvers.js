@@ -13,14 +13,18 @@ export default {
       const user = await db.user.findOne({ code });
       if (!user) throw new Error(`No user found for code '${code}'`);
       return {
-        token: sign({ userId: user.id, role: user.role }, APP_SECRET),
+        token: sign({ userId: user.id, role: user.role }, APP_SECRET, {
+          expiresIn: 60 * 60
+        }),
         user
       };
     },
     signup: async (_, { data }, { db }) => {
       const user = await db.user.create({ ...data });
       return {
-        token: sign({ userId: user.id, role: user.role }, APP_SECRET),
+        token: sign({ userId: user.id, role: user.role }, APP_SECRET, {
+          expiresIn: 60 * 60
+        }),
         user
       };
     }
