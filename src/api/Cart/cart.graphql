@@ -3,8 +3,8 @@ type Query {
 }
 
 type Mutation {
-  addCart(data: CartAddInput!, where: CartWhereUniqueInput!): Cart
-  removeCart(where: CartWhereUniqueInput!): Cart
+  addCart(data: CartAddInput!): Cart
+  removeCart(data: CartRemoveInput!): Cart
 }
 
 type Subscription {
@@ -21,11 +21,12 @@ type Cart {
 }
 
 input CartAddInput {
+  productId: ID!
   quantity: Int!
 }
 
-input CartWhereUniqueInput {
-  productId: ID
+input CartRemoveInput {
+  productId: ID!
 }
 
 type CartSubscriptionPayload {

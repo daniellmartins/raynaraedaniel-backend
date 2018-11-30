@@ -7,19 +7,27 @@ export default {
   Mutation: {
     addCart: async (
       _,
-      { data: { quantity }, where: { productId } },
+      { data: { productId, quantity } },
       { db, userId, pubSub }
     ) => {
       let mutation = "UPDATED";
-      let node = await db.cart.findOneAndUpdate(
-        { userId, productId },
-        { quantity },
-        { new: true }
-      );
+      let node = await db.cart.findOne({ userId, productId });
 
       if (!node) {
         mutation = "CREATED";
         node = await db.cart.create({ userId, productId, quantity });
+      } else {
+        const product = await db.product.findById(node.productId);
+
+        if (!product || !node || (quantity > product.stock || quantity < 1)) {
+          throw new Error("addCart error");
+        }
+
+        node = await db.cart.findByIdAndUpdate(
+          node._id,
+          { quantity },
+          { new: true }
+        );
       }
 
       await pubSub.publish("CART", {
@@ -27,7 +35,7 @@ export default {
       });
       return node;
     },
-    removeCart: async (_, { where: { productId } }, { db, userId, pubSub }) => {
+    removeCart: async (_, { data: { productId } }, { db, userId, pubSub }) => {
       const node = await db.cart.findOneAndDelete({ userId, productId });
       await pubSub.publish("CART", {
         cart: { mutation: "DELETED", node }

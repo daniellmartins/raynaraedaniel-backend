@@ -57,5 +57,10 @@ export default {
         return await pubSub.asyncIterator("PRODUCT");
       }
     }
+  },
+  Product: {
+    cart: async (_, args, { db, userId }) => {
+      return await db.cart.findOne({ userId, productId: _.id });
+    }
   }
 };

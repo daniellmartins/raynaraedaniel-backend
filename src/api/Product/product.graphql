@@ -43,6 +43,7 @@ type Product {
   stock: Int!
   reserved: Boolean!
   active: Boolean
+  cart: Cart
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -71,18 +72,4 @@ input ProductUpdateInput {
 
 input ProductWhereUniqueInput {
   _id: ID
-}
-
-type ProductPreviousValues {
-  _id: ID!
-  name: String!
-  description: String
-  photoUrl: String
-  price: Float!
-  quantity: Int!
-  stock: Int!
-  reserved: Boolean!
-  active: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
