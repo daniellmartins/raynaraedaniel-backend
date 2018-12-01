@@ -45,10 +45,16 @@ export const permissions = {
   },
   Mutation: {
     addCart: isUser,
+    addReserved: isUser,
     createProduct: isAdmin,
     deleteProduct: isAdmin,
     removeCart: isUser,
+    removeReserved: isAdmin,
     signup: isAdmin,
     updateProduct: isAdmin
+  },
+  Subscription: {
+    cart: isUser,
+    product: isUser
   }
 };

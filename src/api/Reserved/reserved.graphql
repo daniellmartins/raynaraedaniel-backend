@@ -1,0 +1,30 @@
+# type Query {
+#   reserved: [Reserved!]
+# }
+
+type Mutation {
+  addReserved(data: ReservedAddInput!): Reserved
+  removeReserved(data: ReservedRemoveInput!): Reserved
+}
+
+type Reserved {
+  _id: ID!
+  name: String!
+  tel: String!
+  user: User!
+  product: Product!
+  quantity: Int!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ReservedAddInput {
+  name: String!
+  tel: String!
+  productId: ID!
+  quantity: Int!
+}
+
+input ReservedRemoveInput {
+  productId: ID!
+}
