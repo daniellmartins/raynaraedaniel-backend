@@ -1,3 +1,5 @@
+import { withFilter } from "graphql-yoga";
+
 export default {
   Query: {
     cart: async (_, args, { db, userId }) => {
@@ -54,9 +56,13 @@ export default {
   },
   Subscription: {
     cart: {
-      subscribe: async (_, args, { pubSub }) => {
-        return await pubSub.asyncIterator("CART");
-      }
+      subscribe: withFilter(
+        (_, args, { pubSub }) => {
+          return pubSub.asyncIterator("CART");
+        },
+        (_, args, { userId }) =>
+          userId.toString() === _.cart.node.userId.toString()
+      )
     }
   }
 };
