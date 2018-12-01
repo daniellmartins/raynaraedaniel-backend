@@ -8,7 +8,7 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 mongoose.set("useCreateIndex", true);
-mongoose.set("debug", DEBUG);
+// mongoose.set("debug", DEBUG);
 
 // bug graphql-js https://github.com/graphql/graphql-js/issues/1518
 const { ObjectId } = mongoose.Types;
