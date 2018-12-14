@@ -51,16 +51,20 @@ export default {
       return product;
     }
   },
+  Product: {
+    cart: async (_, args, { db, userId }) => {
+      return await db.cart.findOne({ userId, productId: _.id });
+    }
+    // cart: async (_, args, { db, userId, loaders }) => {
+    //   // return await db.cart.findById(_.productId);
+    //   return await loaders.cart.load(userId);
+    // }
+  },
   Subscription: {
     product: {
       subscribe: async (_, args, { pubSub }) => {
         return await pubSub.asyncIterator("PRODUCT");
       }
-    }
-  },
-  Product: {
-    cart: async (_, args, { db, userId }) => {
-      return await db.cart.findOne({ userId, productId: _.id });
     }
   }
 };
