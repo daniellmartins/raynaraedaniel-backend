@@ -3,3 +3,5 @@
 /build
 yarn.lock
 .env
+.env.test
+.env.production
