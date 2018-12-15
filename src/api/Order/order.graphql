@@ -1,0 +1,23 @@
+type Query {
+  getSessionId: String!
+}
+
+type Mutation {
+  createOrder(data: OrderCreateInput!): Boolean!
+}
+
+input OrderCreateInput {
+  senderName: String!
+  senderCPF: String!
+  senderAreaCode: String!
+  senderPhone: String!
+  senderEmail: String!
+  shippingAddressStreet: String!
+  shippingAddressNumber: String!
+  shippingAddressComplement: String
+  shippingAddressDistrict: String!
+  shippingAddressPostalCode: String!
+  shippingAddressCity: String!
+  paymentMethod: String!
+  senderHash: String
+}

@@ -47,6 +47,7 @@ export const permissions = {
     addCart: isUser,
     addReserved: isUser,
     createProduct: isAdmin,
+    createOrder: isUser,
     deleteProduct: isAdmin,
     removeCart: isUser,
     removeReserved: isAdmin,
