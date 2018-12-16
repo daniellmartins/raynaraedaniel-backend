@@ -1,6 +1,6 @@
 type Query {
   log(_id: ID!): Log!
-  logs: [Log!]
+  logs(limit: Int, offset: Int): [Log!]
 }
 
 type Log {
