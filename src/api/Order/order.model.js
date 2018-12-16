@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = Schema(
   {
+    transaction: {
+      type: String,
+      require: true
+    },
     senderName: {
       type: String,
       required: true

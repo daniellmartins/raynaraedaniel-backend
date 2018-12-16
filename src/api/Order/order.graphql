@@ -3,7 +3,7 @@ type Query {
 }
 
 type Mutation {
-  createOrder(data: OrderCreateInput!): Boolean!
+  createOrder(data: OrderCreateInput!): String!
 }
 
 input OrderCreateInput {
@@ -20,4 +20,8 @@ input OrderCreateInput {
   shippingAddressCity: String!
   paymentMethod: String!
   senderHash: String
+  creditCardToken: String!
+  installmentQuantity: String!
+  installmentValue: String!
+  noInterestInstallmentQuantity: String!
 }
