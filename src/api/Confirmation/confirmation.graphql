@@ -1,0 +1,16 @@
+type Mutation {
+  createConfirmation(data: ConfirmationCreateInput!): Confirmation
+}
+
+type Confirmation {
+  _id: ID!
+  name: String!
+  confirmation: String!
+  adults: Int!
+}
+
+input ConfirmationCreateInput {
+  name: String!
+  confirmation: String!
+  adults: Int!
+}
