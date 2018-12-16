@@ -1,0 +1,10 @@
+type Query {
+  log(_id: ID!): Log!
+  logs: [Log!]
+}
+
+type Log {
+  _id: ID!
+  user: User!
+  createdAt: DateTime
+}
