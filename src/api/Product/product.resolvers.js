@@ -14,7 +14,7 @@ export default {
     },
     products: async (_, { orderBy }, { db }) => {
       let sort = [["quantity", 1]];
-      if (orderBy) sort = [...sort, sortBy(orderBy)];
+      if (orderBy) sort = [...sort, sortBy(orderBy), ["name", 1]];
 
       return await db.product.find({ active: true }).sort(sort);
     }
