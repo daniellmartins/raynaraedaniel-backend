@@ -127,7 +127,7 @@ export default {
           });
 
           await carts.map(async cart => {
-            const product = await db.product.findById(cart.productId);
+            let product = await db.product.findById(cart.productId);
             product.stock = product.stock - cart.quantity;
             await product.save();
 
@@ -137,28 +137,48 @@ export default {
 
             const allCarts = await db.cart.find({ productId: cart.productId });
             await allCarts.map(async allCart => {
-              if (allCart.quantity === cart.quantity) {
+              if (
+                product.stock === 0 ||
+                (allCart.quantity === cart.quantity &&
+                  product.stock < cart.quantity)
+              ) {
                 const cartdelete = await db.cart.findByIdAndDelete(allCart._id);
                 await pubSub.publish("CART", {
                   cart: { mutation: "DELETED", node: cartdelete }
                 });
-              } else {
+              }
+              if (allCart.quantity > product.stock) {
                 const updateCart = await db.cart.findById(allCart._id);
-                updateCart.quantity = updateCart.quantity - cart.quantity;
+                updateCart.quantity = product.stock;
                 const cartupdate = await updateCart.save();
                 await pubSub.publish("CART", {
                   cart: { mutation: "UPDATED", node: cartupdate }
                 });
               }
             });
+
+            const cartsByUser = await db.cart.find({ userId });
+            if (cartsByUser) {
+              await cartsByUser.map(async cartByUser => {
+                const cartByUserDelete = await db.cart.findByIdAndDelete(
+                  cartByUser._id
+                );
+                await pubSub.publish("CART", {
+                  cart: { mutation: "DELETED", node: cartByUserDelete }
+                });
+              });
+
+              await pubSub.publish("PRODUCT", {
+                product: { mutation: "UPDATED", node: product }
+              });
+            }
           });
 
           await db.order.create({ transaction, ...args.data });
           return link;
         })
         .catch(error => {
-          console.log(error);
-          return "false";
+          throw new Error("createOrder error");
         });
     }
   }
