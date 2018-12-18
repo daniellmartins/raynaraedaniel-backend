@@ -40,6 +40,7 @@ const isAdmin = async (resolve, _, args, ctx, info) => {
 export const permissions = {
   Query: {
     cart: isUser,
+    carts: isAdmin,
     me: isUser,
     products: isUser
   },

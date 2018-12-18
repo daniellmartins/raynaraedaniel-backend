@@ -1,5 +1,6 @@
 type Query {
   cart: [Cart!]
+  carts: [Cart!]
 }
 
 type Mutation {

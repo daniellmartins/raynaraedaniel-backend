@@ -4,6 +4,9 @@ export default {
   Query: {
     cart: async (_, args, { db, userId }) => {
       return await db.cart.find({ userId }).sort("createdAt");
+    },
+    carts: async (_, args, { db }) => {
+      return await db.cart.find().sort("createdAt");
     }
   },
   Mutation: {
