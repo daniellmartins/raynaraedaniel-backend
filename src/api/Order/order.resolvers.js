@@ -143,17 +143,21 @@ export default {
                   product.stock < cart.quantity)
               ) {
                 const cartdelete = await db.cart.findByIdAndDelete(allCart._id);
-                await pubSub.publish("CART", {
-                  cart: { mutation: "DELETED", node: cartdelete }
-                });
+                if (cartdelete) {
+                  await pubSub.publish("CART", {
+                    cart: { mutation: "DELETED", node: cartdelete }
+                  });
+                }
               }
               if (allCart.quantity > product.stock) {
                 const updateCart = await db.cart.findById(allCart._id);
-                updateCart.quantity = product.stock;
-                const cartupdate = await updateCart.save();
-                await pubSub.publish("CART", {
-                  cart: { mutation: "UPDATED", node: cartupdate }
-                });
+                if (updateCart) {
+                  updateCart.quantity = product.stock;
+                  const cartupdate = await updateCart.save();
+                  await pubSub.publish("CART", {
+                    cart: { mutation: "UPDATED", node: cartupdate }
+                  });
+                }
               }
             });
 
