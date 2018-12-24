@@ -182,6 +182,7 @@ export default {
           return link;
         })
         .catch(error => {
+          console.log(error);
           throw new Error("createOrder error");
         });
     }

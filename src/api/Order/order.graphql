@@ -21,6 +21,7 @@ input OrderCreateInput {
   paymentMethod: String!
   senderHash: String
   creditCardToken: String!
+  creditCardHolderBirthDate: String!
   installmentQuantity: String!
   installmentValue: String!
   noInterestInstallmentQuantity: String!
