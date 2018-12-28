@@ -77,7 +77,7 @@ export default {
       const data = {
         extraAmount: "0.00",
         ...items,
-        notificationURL: "https://sualoja.com.br/notifica.html",
+        notificationURL: "https://www.raynaraedaniel.com/graphql",
         reference: `${userId}_${Date.now()}`,
         email: PAGSEGURO_AUTH_EMAIL,
         token: PAGSEGURO_AUTH_TOKEN,
@@ -85,23 +85,16 @@ export default {
         paymentMode: "default",
         receiverEmail: "xpdaniel2011@gmail.com",
         currency: "BRL",
-        senderAreaCode: 11,
-        senderPhone: 56273440,
-        shippingAddressState: "PB",
         shippingAddressCountry: "BRA",
         shippingType: 1,
         shippingCost: "0.00",
-        creditCardHolderName: args.data.senderName,
-        creditCardHolderCPF: args.data.senderCPF,
-        creditCardHolderAreaCode: 83,
-        creditCardHolderPhone: 999702863,
         billingAddressStreet: args.data.shippingAddressStreet,
         billingAddressNumber: args.data.shippingAddressNumber,
         billingAddressComplement: args.data.shippingAddressComplement,
         billingAddressDistrict: args.data.shippingAddressDistrict,
         billingAddressPostalCode: args.data.shippingAddressPostalCode,
         billingAddressCity: args.data.shippingAddressCity,
-        billingAddressState: "PB",
+        billingAddressState: args.data.shippingAddressState,
         billingAddressCountry: "BRA"
       };
 

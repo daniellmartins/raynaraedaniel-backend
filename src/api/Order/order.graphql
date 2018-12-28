@@ -18,10 +18,15 @@ input OrderCreateInput {
   shippingAddressDistrict: String!
   shippingAddressPostalCode: String!
   shippingAddressCity: String!
+  shippingAddressState: String!
   paymentMethod: String!
   senderHash: String
   creditCardToken: String!
-  creditCardHolderBirthDate: String!
+  creditCardHolderBirthDate: String
+  creditCardHolderName: String
+  creditCardHolderCPF: String
+  creditCardHolderAreaCode: String
+  creditCardHolderPhone: String
   installmentQuantity: String!
   installmentValue: String!
   noInterestInstallmentQuantity: String!
