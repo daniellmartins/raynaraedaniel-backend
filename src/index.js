@@ -14,7 +14,7 @@ const opts = {
   debug: DEBUG,
   endpoint: "/graphql",
   subscriptions: "/graphql",
-  playground: "/graphql"
+  playground: PLAYGROUND
 };
 
 const server = new GraphQLServer({
