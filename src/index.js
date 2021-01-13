@@ -10,7 +10,7 @@ String.prototype.isEmpty = function () {
 };
 
 const opts = {
-  port: PORT || 3000,
+  port: PORT || 4000,
   debug: DEBUG,
   endpoint: "/graphql",
   subscriptions: "/graphql",
